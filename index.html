@@ -7,11 +7,12 @@
     <style>
         body {
             text-align: center;
-            background-color: #ffe6e6;
+            background-color: #ffe6f2;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
         h1 {
-            color: #ff3366;
+            color: #ff3399;
             font-size: 36px;
             margin-top: 50px;
         }
@@ -24,7 +25,7 @@
             margin-top: 20px;
         }
         button {
-            background-color: #ff3366;
+            background-color: #ff3399;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -34,26 +35,49 @@
             margin: 10px;
         }
         button:hover {
-            background-color: #cc0052;
+            background-color: #cc0077;
         }
         #final-message {
             display: none;
             font-size: 28px;
-            color: #ff3366;
+            color: #ff3399;
             margin-top: 30px;
         }
-        .hearts {
-            font-size: 50px;
-            color: red;
-            animation: hearts-fall 2s infinite;
+        #proposal {
+            display: none;
+            font-size: 32px;
+            color: #ff3399;
         }
-        @keyframes hearts-fall {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(50px); }
+        #proposal-buttons {
+            display: none;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatUp 3s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-500px); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            color: red;
+            animation: floatUp 2s linear infinite;
         }
     </style>
 </head>
 <body>
+
+    <!-- Romantic Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
     <h1>🌸 My Sweet Bubu 🌸</h1>
     <p>Let's play a little game before the big surprise! ❤️</p>
@@ -77,9 +101,9 @@
     <div class="question-box">
         <p><strong>3️⃣ What was the first thing I called you?</strong></p>
         <button onclick="checkAnswer(this, 'wrong')">Panda</button>
-        <button onclick="checkAnswer(this, 'wrong')">Penguin</button>
+        <button onclick="checkAnswer(this, 'correct')">Penguin</button>
         <button onclick="checkAnswer(this, 'wrong')">Crocodile</button>
-        <button onclick="checkAnswer(this, 'correct')">Kaddu</button>
+        <button onclick="checkAnswer(this, 'wrong')">Kaddu</button>
     </div>
 
     <div class="question-box">
@@ -99,8 +123,8 @@
     </div>
 
     <h2 id="final-message">🎉 You did it, Bubu! Now, I have a question for you... 🎉</h2>
-    <h1 id="proposal" style="display:none;">💖 Will you be my girlfriend again? 💖</h1>
-    <div id="proposal-buttons" style="display:none;">
+    <h1 id="proposal">💖 Will you be my girlfriend again? 💖</h1>
+    <div id="proposal-buttons">
         <button onclick="yesClicked()">Yes, of course! 😍</button>
         <button onclick="noClicked()">No (Try again 😆)</button>
     </div>
@@ -112,6 +136,7 @@
             if (status === 'correct') {
                 button.style.backgroundColor = "green";
                 correctAnswers++;
+                popBalloons();
             } else {
                 button.style.backgroundColor = "red";
             }
@@ -123,21 +148,39 @@
                     setTimeout(() => {
                         document.getElementById("proposal").style.display = "block";
                         document.getElementById("proposal-buttons").style.display = "block";
+                        showHearts();
                     }, 2000);
                 }, 1000);
             }
         }
 
+        function popBalloons() {
+            for (let i = 0; i < 5; i++) {
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * 90 + "%";
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 3000);
+            }
+        }
+
+        function showHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "%";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+
         function yesClicked() {
-            document.body.innerHTML = `
-                <h1>🎊 Yayyy! Bubu said YES! 🎊</h1>
-                <p>You're the love of my life, and I promise to always make you smile! ❤️</p>
-                <div class="hearts">💖💖💖💖💖</div>
-            `;
+            alert("Yay! Bubu said YES! 💖💖💖");
         }
 
         function noClicked() {
-            alert("Nope, you HAVE to say yes! Try again 😆");
+            alert("Nooo! Try again 😆");
         }
     </script>
 
