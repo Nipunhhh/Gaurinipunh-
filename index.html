@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal for Bubu 💖</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #ff3366;
+            font-size: 36px;
+            margin-top: 50px;
+        }
+        .question-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff3366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #cc0052;
+        }
+        #final-message {
+            display: none;
+            font-size: 28px;
+            color: #ff3366;
+            margin-top: 30px;
+        }
+        .hearts {
+            font-size: 50px;
+            color: red;
+            animation: hearts-fall 2s infinite;
+        }
+        @keyframes hearts-fall {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(50px); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌸 My Sweet Bubu 🌸</h1>
+    <p>Let's play a little game before the big surprise! ❤️</p>
+
+    <div class="question-box">
+        <p><strong>1️⃣ When did we first meet?</strong></p>
+        <button onclick="checkAnswer(this, 'correct')">14th June 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">30th June 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">6th July 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">14th July 2024</button>
+    </div>
+
+    <div class="question-box">
+        <p><strong>2️⃣ When did I propose to you?</strong></p>
+        <button onclick="checkAnswer(this, 'correct')">30th June 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">14th June 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">6th July 2024</button>
+        <button onclick="checkAnswer(this, 'wrong')">14th July 2024</button>
+    </div>
+
+    <div class="question-box">
+        <p><strong>3️⃣ What was the first thing I called you?</strong></p>
+        <button onclick="checkAnswer(this, 'wrong')">Panda</button>
+        <button onclick="checkAnswer(this, 'wrong')">Penguin</button>
+        <button onclick="checkAnswer(this, 'wrong')">Crocodile</button>
+        <button onclick="checkAnswer(this, 'correct')">Kaddu</button>
+    </div>
+
+    <div class="question-box">
+        <p><strong>4️⃣ Select the odd one out:</strong></p>
+        <button onclick="checkAnswer(this, 'wrong')">Butterscotch Ice Cream</button>
+        <button onclick="checkAnswer(this, 'wrong')">Chocolate Cake</button>
+        <button onclick="checkAnswer(this, 'correct')">Milk</button>
+        <button onclick="checkAnswer(this, 'wrong')">Cold Rice</button>
+    </div>
+
+    <div class="question-box">
+        <p><strong>5️⃣ What is my dream after becoming successful?</strong></p>
+        <button onclick="checkAnswer(this, 'wrong')">Open my own firm</button>
+        <button onclick="checkAnswer(this, 'correct')">Marry Bubu Patel ❤️</button>
+        <button onclick="checkAnswer(this, 'wrong')">Get rich and explore the world</button>
+        <button onclick="checkAnswer(this, 'wrong')">Die (Nooo!)</button>
+    </div>
+
+    <h2 id="final-message">🎉 You did it, Bubu! Now, I have a question for you... 🎉</h2>
+    <h1 id="proposal" style="display:none;">💖 Will you be my girlfriend again? 💖</h1>
+    <div id="proposal-buttons" style="display:none;">
+        <button onclick="yesClicked()">Yes, of course! 😍</button>
+        <button onclick="noClicked()">No (Try again 😆)</button>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+
+        function checkAnswer(button, status) {
+            if (status === 'correct') {
+                button.style.backgroundColor = "green";
+                correctAnswers++;
+            } else {
+                button.style.backgroundColor = "red";
+            }
+            button.disabled = true;
+
+            if (correctAnswers === 5) {
+                setTimeout(() => {
+                    document.getElementById("final-message").style.display = "block";
+                    setTimeout(() => {
+                        document.getElementById("proposal").style.display = "block";
+                        document.getElementById("proposal-buttons").style.display = "block";
+                    }, 2000);
+                }, 1000);
+            }
+        }
+
+        function yesClicked() {
+            document.body.innerHTML = `
+                <h1>🎊 Yayyy! Bubu said YES! 🎊</h1>
+                <p>You're the love of my life, and I promise to always make you smile! ❤️</p>
+                <div class="hearts">💖💖💖💖💖</div>
+            `;
+        }
+
+        function noClicked() {
+            alert("Nope, you HAVE to say yes! Try again 😆");
+        }
+    </script>
+
+</body>
+</html>
